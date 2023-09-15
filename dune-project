@@ -8,9 +8,7 @@
  (synopsis "simple blog")
  (depends 
  dune
- (ocaml
-   (= 5.0.0)
- )
+ (ocaml)
  (ocamlformat (= 0.26.0))
  (dream
    (= 1.0.0~alpha5))))
