@@ -8,7 +8,7 @@
  (synopsis "simple blog")
  (depends 
  dune
- (ocaml)
+ ocaml
  (ocamlformat (= 0.26.0))
  (dream
    (= 1.0.0~alpha5))))
