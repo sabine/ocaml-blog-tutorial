@@ -1,14 +1,13 @@
-(lang dune 2.0)
+(lang dune 3.0)
+
+(name myblog)
 
 (generate_opam_files)
 
 (package
  (name myblog)
- (maintainers "no one")
- (synopsis "simple blog")
- (depends 
- dune
- ocaml
- (ocamlformat (= 0.26.0))
- (dream
+ (synopsis "A tutorial on how to build a simple blog with OCaml")
+ (description "A tutorial on how to build a simple blog with OCaml")
+ (depends
+  (dream
    (= 1.0.0~alpha5))))
