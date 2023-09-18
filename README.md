@@ -1,54 +1,71 @@
 # Let's Write a Simple Blog in OCaml
 
-This repository contains a tutorial suitable for use in a workshop format.
+Welcome to this tutorial on writing a simple blog in OCaml.
 
-The goal of writing a blog website is broken down into discrete tasks with respective possible solutions.
+This tutorial and the content of this repository are resources for a workshop at Ada tech school the 22nd of September.
 
-On every step, the file [TASK.md](TASK.md) contains explanations, instructions, as well as some hints on what to do next.
+Before attending the workshop or going through the tutorial, please make sure you're all set by going through the Setup Your Environment section below.
 
-## What exactly are we building?
+Once you're all set, you can start by reading the [Tour of OCaml](https://staging.ocaml.org/docs/a-tour-of-ocaml) on the official documentation, and read the accompanying [Functional Programming guide](./functionnal_programming.md), and move on with the tutorial below. 
 
-A blog is a website that displays long-form posts on specific topics, keywords, or sources.
+## Setup Your Environment
 
-The individual posts will be presented in a single, easy-to-read feed.
+We're going to use Dev Containers for this workshop.
 
-# Outline 
+To use them, you'll need a few things:
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [The Dev Containers VSCode extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-## I. Introduction (5 minutes)
+If you're unsure how to install any of these, have a look a the [Developing inside a Container] guide from the VSCode documentation: the Getting Started section should guide you through the installation of all of the above.
 
-### 1. Briefly introduce speakers and their experience with OCaml
-### 2. Introduce the topic of the talk and its relevance to the audience
+Once you have VSCode and the Dev Containers extension installed, you can open this repository inside a Dev Containers.
 
-## II. What is Functional Programming? (15 minutes)
+First, clone the Git repository locally:
 
-See [Functional Programming](./functionnal_programming.md)
+```
+git clone https://github.com/sabine/ocaml-blog-tutorial.git
+```
 
-## III. Setup your environment (15 minutes)
+Start VSCode, and run the "Dev Containers: Open Folder in Container" command from the command palette, and select the `ocaml-blog-tutorial` folder you've just cloned.
 
-Clone the repository, use dev container. Open the terminal, and UTop!
+You can test that everything is working by running the following in VSCode's terminal:
 
-Clone https://github.com/sabine/ocaml-blog-tutorial.
-Install the dev container VSCode extension: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers.
+```
+dune exec src/main.exe
+```
 
-CTRL+SHIFT+P "Dev Containers: Open Folder in Container"
+If it prints "Hello World!", you're all set!
 
-## IV. A Tour of OCaml (1 hour)
+## Tutorial
 
-Open https://staging.ocaml.org/docs/a-tour-of-ocaml and go through it.
+We've prepared a working directory in `src/` it already contains an OCaml module, and a dune file that declares an executable.
 
-## V. Web Development in OCaml (1 hour)
+## Step 1: Hello World
 
-- 1st hour
-  - 15min - fp_examples.ml
-  - 45min - Tour of OCaml with utop in the dev container - 
-- 2nd hour: starting from the hello world example in this repo, we build a very simple blog
-  - break 15min
-  - run the hello world example
-  - do step by step project from the folders
-- 3rd hour:
-  - represent the blog post as OCaml datatype
-  - load the blog post from a markdown file
-  - render a HTML template that lists all blog posts
+To write our web application, we'll use [Dream](https://github.com/aantron/dream), OCaml's web framework.
 
+Dream exposes all of its functions in its toplevel `Dream` module. To run a Dream application, you can call the [`Dream.run`](https://aantron.github.io/dream/#val-run) function. It only has one non-optional argument: a Handler.
 
-TODO: make playgrounds for the Tour of OCaml
+In Dream, a [Handler](https://aantron.github.io/dream/#type-handler) is a function that takes a `Dream.request` as input, and returns a `Dream.response`. If you've worked with other web frameworks, you might have come across the term "Controller". It's essentially the same thing.
+
+Here's an example of a handler:
+
+```ocaml
+let my_handler _req =
+    Dream.html "Good morning, world!"
+```
+
+Tying things together, update `main.ml` to implement a Dream application that always returns "Hello World!".
+
+## Step 2: Sending HTML
+
+???
+
+## Step 3: Render a list of posts
+
+???
+
+## Step 4: Subpage for individual posts
+
+???
