@@ -1,0 +1,11 @@
+let all_posts (posts : Post.t list) =
+  <html>
+  <body>
+    <h1>All Posts</h1>
+    <ul>
+      <% posts |> List.iter (fun (p: Post.t) -> %>
+      <li><%s p.title %></li>
+      <% ); %>
+    </ul>
+  </body>
+  </html>

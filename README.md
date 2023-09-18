@@ -58,3 +58,37 @@ Before attending the workshop, familiarize yourself with OCaml through the follo
 You are now all set for the workshop! Keep an eye on this repository for the tutorial, which we will delve into during the workshop session.
 
 We look forward to building together with you at the Ada Tech School on the 22nd of September, 2023.
+
+## Tutorial
+
+We've prepared a working directory in `src/` it already contains an OCaml module, and a dune file that declares an executable.
+
+### Step 1: Hello World
+
+To write our web application, we'll use [Dream](https://github.com/aantron/dream), OCaml's web framework.
+
+Dream exposes all of its functions in its toplevel `Dream` module. To run a Dream application, you can call the [`Dream.run`](https://aantron.github.io/dream/#val-run) function. It only has one non-optional argument: a Handler.
+
+In Dream, a [Handler](https://aantron.github.io/dream/#type-handler) is a function that takes a `Dream.request` as input, and returns a `Dream.response`. If you've worked with other web frameworks, you might have come across the term "Controller". It's essentially the same thing.
+
+Here's an example of a handler:
+
+```ocaml
+let my_handler _req =
+    Dream.html "Good morning, world!"
+```
+
+Tying things together, update `main.ml` to implement a Dream application that always returns "Hello World!".
+
+### Step 2: Sending HTML
+
+???
+
+### Step 3: Render a list of posts
+
+???
+
+### Step 4: Subpage for individual posts
+
+???
+
