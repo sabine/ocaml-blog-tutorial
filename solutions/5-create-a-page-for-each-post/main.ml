@@ -5,9 +5,9 @@
   1. Create a new function `Template.post` that renders the blog post
     a - in the template, you can use <%s! ... %> to render the html_body of the post.
         s! tells the template that the OCaml expression in this block is a string and
-        that it should not be HTML-escaped. One must always make sure not to only
-        use this raw string tag on sanitized HTML - otherwise,
-        an [XSS attack](https://owasp.org/www-community/attacks/xss/) is possible.
+        that it should not be HTML-escaped. One must only use this raw string tag
+        on sanitized HTML - otherwise, an [XSS attack](https://owasp.org/www-community/attacks/xss/)
+        is possible.
    
   2. Look up the post using the :slug parameter of the new route and render the new Template.
     a - use the function List.find : (Post.t -> bool) -> Post.t list -> Post.t.
