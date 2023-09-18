@@ -1,6 +1,6 @@
 (executable
  (name main)
- (public_name solution3)
+ (public_name solution5)
  (libraries dream))
 
 (rule

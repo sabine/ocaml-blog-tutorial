@@ -1,6 +1,6 @@
 type t = { title : string; slug : string; html_body : string }
 
-let posts =
+let all =
   [
     {
       title = "Hello I am the first post!";
@@ -14,7 +14,7 @@ let posts =
     };
     {
       title = "Hello I am the third post!";
-      slug = "hello";
+      slug = "third-post";
       html_body = "<p>See you later!</p>";
     };
   ]
