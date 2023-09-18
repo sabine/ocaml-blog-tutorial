@@ -45,7 +45,7 @@ If you see the "Hello World!" message printed in the terminal, your setup is suc
 Before attending the workshop, familiarize yourself with OCaml through the following resources:
 
 - **[About OCaml](https://ocaml.org/about)**: A high-level introduction to the OCaml language and why you might want to use it.
-- **[A Tour of OCaml](https://staging.ocaml.org/docs/a-tour-of-ocaml)**: Dive into the official OCaml documentation to understand the core concepts of the language. No need to be thorough since we'll cover this during the workshop, but you might want to skip through to prepare questions.
+- **[A Tour of OCaml](https://staging.ocaml.org/docs/a-tour-of-ocaml)**: Dive into the official OCaml documentation to understand the core concepts of the language. No need to be thorough since we'll cover this during the workshop, but you might want to skim through to prepare questions.
 
 ## Ready to Start
 
