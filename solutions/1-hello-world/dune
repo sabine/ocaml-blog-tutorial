@@ -1,4 +1,0 @@
-(executable
- (name main)
- (public_name solution1)
- (libraries dream))
