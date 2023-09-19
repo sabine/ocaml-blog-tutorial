@@ -32,13 +32,13 @@ Initializing the environment for the first time might take a few minutes, as it 
 
 ### 4. Verify Your Setup
 
-To ensure everything is set up correctly, run the following command in the VSCode terminal:
+To ensure everything is set up correctly, run the following command in the VSCode terminal (Terminal > New Terminal):
 
 ```sh
-dune exec src/main.exe
+dune exec main
 ```
 
-If you see the "Hello World!" message printed in the terminal, your setup is successful!
+When you see the "Hello World!" message printed in the terminal, your setup is successful!
 
 ## Recommended Readings
 
