@@ -16,6 +16,12 @@ To provide a seamless workshop experience, we'll be using Dev Containers. To get
 
 If you encounter any issues while installing the applications above, consult the [Developing inside a Container](https://code.visualstudio.com/docs/devcontainers/containers) guide from the VSCode documentation.
 
+#### On Windows
+
+```
+net localgroup docker-users "your-user-id" /ADD
+```
+
 ### 2. Clone the Workshop Repository
 
 Once you have VSCode and the Dev Containers extension ready, clone the workshop repository to your local machine using the following command:
