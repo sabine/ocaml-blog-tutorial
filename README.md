@@ -102,7 +102,7 @@ Dream supports different HTML template engines. The one we're going to use is th
 
 1. Create a new file `template.eml.html` in the same folder as `main.ml` with this content:
 
-```
+```ocaml
 let render param =
   <html>
     <body>
@@ -111,9 +111,9 @@ let render param =
   </html>
 ```
 
-2. Add this code to the dune file:
+2. Add this code to the `dune` file:
 
-```
+```s
 (rule
  (targets template.ml)
  (deps template.eml.html)
@@ -127,7 +127,7 @@ The function `render` from `template.eml.html` can now be used in your program l
 
 3. Change `main.ml` by replacing the string "Hello world!" with
 
-```
+```ocaml
 (Template.render "world")
 ```
 
@@ -151,7 +151,9 @@ Hint: look at https://github.com/aantron/dream/tree/master/example/3-router#file
 
 You can use
 
-```Dream.get "**" (fun _ -> Dream.html ~code:404 "404 Not Found")```
+```ocaml
+Dream.get "**" (fun _ -> Dream.html ~code:404 "404 Not Found")
+```
 
 at the end of the list of routes to to register a handler that returns a 404 response. Here, `**` is a wildcard that matches and URL. Since routes are matched from top to bottom, this handler will only be called if none of the other routes matched.
 
@@ -168,7 +170,7 @@ For now, we'll represent a blog post as a struct that has fields for the blog po
 
 1. Create a new file `post.ml` in the same directory as `main.ml` with the following content:
 
-```
+```ocaml
 type t = { title : string; slug : string; html_body : string; image : string }
 
 let all =
@@ -202,7 +204,7 @@ Now, `Post.t` is a type that represents a single blog post, and `Post.all : t li
 
 You can iterate over the list of posts using the `List.iter` function like this:
 
-```
+```ocaml
     <% posts |> List.iter (fun (p: Post.t) -> %>
         ... TODO: write HTML here ...
     <% ); %>
@@ -224,7 +226,7 @@ We will need a new template for the
 
 1. Create a new function `post` in `template.eml.html` that takes a parameter `(post: Post.t)` and renders the following template:
 
-```
+```ocaml
 let post (post : Post.t) =
   <html>
     <body>
@@ -252,7 +254,7 @@ Notice that, when the blog post does not exist, we get an error.
 
 3a. (optional) To avoid that, you can use `List.find_opt : (Post.t -> bool) -> Post.t list -> Post.t option` instead, and you can use
 
-```
+```ocaml
 match post with
 | Some p -> ...
 | None -> ...
@@ -280,7 +282,7 @@ See https://aantron.github.io/dream/#static-files for an example of how to do th
 
 2. Modify the templates in `template.eml.html` and add a HTML `<head>` tag that contains the `<link>` tag for the stylesheet:
 
-```
+```ocaml
 <link rel="stylesheet" href="/static/chota.min.css">
 ```
 
@@ -292,7 +294,7 @@ Hint: You can create a `layout` function that takes a string parameter `inner_ht
 
 Hint 2: It is possible to pass a HTML template to the `layout` function like this:
 
-```
+```ocaml
 let all_posts =
     layout (
         <h1>All Posts</h1>
@@ -302,4 +304,15 @@ let all_posts =
 
 4. Add an `<img src="...">` tag to the `post` template in `template.eml.html` to show `post.image`.
 
-5. Look at how much nicer it looks now. A lot could be done here by doing more design work, but let's move on.
+5. Look at how much nicer it looks now.
+
+### Wrapping up for now
+
+There's a lot further we can take this from here. Ideas:
+
+1. Load blog posts from Markdown files (with YAML headers) instead
+2. Load blog posts from a database instead
+3. Add TailwindCSS to the project
+4. Create a RSS feed that lists all the blog posts, for RSS readers to subscribe to
+
+If you're interested in this, or have other ideas where to go with this tutorial, open an issue on the github repo.
