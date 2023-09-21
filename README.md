@@ -312,7 +312,8 @@ There's a lot further we can take this from here. Ideas:
 
 1. Load blog posts from Markdown files (with YAML headers) instead
 2. Load blog posts from a database instead
-3. Add TailwindCSS to the project
-4. Create a RSS feed that lists all the blog posts, for RSS readers to subscribe to
+3. Add more fields like `author`, `date_published`, etc.
+4. Add TailwindCSS to the project
+5. Create a RSS feed that lists all the blog posts, for RSS readers to subscribe to
 
 If you're interested in this, or have other ideas where to go with this tutorial, open an issue on the github repo.
