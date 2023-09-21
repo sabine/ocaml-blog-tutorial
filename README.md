@@ -286,6 +286,20 @@ See https://aantron.github.io/dream/#static-files for an example of how to do th
 
 3. Add a `<div class="container">` right inside the body of both templates, to wrap the existing elements.
 
+3a. (optional) Having the basic structure / layout of the page repeated in every template is repetitive. Can you see how to move the `<html>, <head>, <link>, <body>, <div class="container">` to a separate function that can be used by both the `post` and the `all_posts` template?
+
+Hint: You can create a `layout` function that takes a string parameter `inner_html` and renders it inside the template with `<%s! inner_html %>`.
+
+Hint 2: It is possible to pass a HTML template to the `layout` function like this:
+
+```
+let all_posts =
+    layout (
+        <h1>All Posts</h1>
+        ...
+    )
+```
+
 4. Add an `<img src="...">` tag to the `post` template in `template.eml.html` to show `post.image`.
 
-5. Look at how much nicer it looks now. A lot could be done here by doing more design work, but let's move on and do something else.
+5. Look at how much nicer it looks now. A lot could be done here by doing more design work, but let's move on.
