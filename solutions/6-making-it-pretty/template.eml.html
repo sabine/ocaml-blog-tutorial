@@ -1,0 +1,33 @@
+let post (post : Post.t) =
+  <html>
+    <head>
+      <link rel="stylesheet" href="/static/chota.min.css">
+    </head>
+    <body>
+      <div class="container">
+        <a href="/">all posts</a>
+        <h1><%s post.title %></h1>
+        <img src="/static/<%s post.image %>">
+        <div>
+          <%s! post.html_body %>
+        </div>
+      </div>
+    </body>
+  </html>
+
+let all_posts (posts : Post.t list) =
+  <html>
+    <head>
+      <link rel="stylesheet" href="/static/chota.min.css">
+    </head>
+    <body>
+      <div class="container">
+        <h1>All Posts</h1>
+        <ul>
+          <% posts |> List.iter (fun (p: Post.t) -> %>
+          <li><a href="/post/<%s p.slug %>"><%s p.title %></a></li>
+          <% ); %>
+        </ul>
+      </div>
+    </body>
+  </html>

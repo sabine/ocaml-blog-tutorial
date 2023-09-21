@@ -169,7 +169,7 @@ For now, we'll represent a blog post as a struct that has fields for the blog po
 1. Create a new file `post.ml` in the same directory as `main.ml` with the following content:
 
 ```
-type t = { title : string; slug : string; html_body : string }
+type t = { title : string; slug : string; html_body : string; image : string }
 
 let all =
   [
@@ -177,21 +177,24 @@ let all =
       title = "Hello I am the first post!";
       slug = "hello";
       html_body = "<p>I just wanted to say hi!</p>";
+      image = "computer-4484282_1280.jpg";
     };
     {
       title = "It's a nice day";
       slug = "nice-day";
       html_body = "<p>Don't you think so, too?</p>";
+      image = "man-791049_1280.jpg";
     };
     {
       title = "Hello I am the third post!";
       slug = "third-post";
       html_body = "<p>See you later!</p>";
+      image = "work-3938876_1280.jpg";
     };
   ]
 ```
 
-This is, for now, a list of blog posts that have a `title`, a `slug` and a `html_body`.
+This is, for now, a list of blog posts that have a `title`, a `slug`, a `html_body`, and an `image`.
 
 Now, `Post.t` is a type that represents a single blog post, and `Post.all : t list` is the list of all blog posts.
 
@@ -209,6 +212,8 @@ Render a `<ul>` and iterate over the list to render a `<li>` tag that contains t
 
 Hint: <%s ... %> is used to render an OCaml string.
 
+1. Run the code and check in your browser that http://localhost:8080 shows list of blog posts
+
 ### Step 5: Subpage for individual posts
 
 All we did in the last step was render a list of titles of the blog posts, but now we want to give every blog post its own HTML page under the URL `/post/:slug`. This would allow people to link to or bookmark a specific blog post.
@@ -217,36 +222,70 @@ We will need a new template for the
 
 **Tasks:**
 
-1. Create a new function `Template.post` that renders the blog post
-
-In the template, you can use `<%s! ... %>` to render the `html_body` of the post as raw HTML.
-`s!` means that the OCaml expression in this block is a string that should be placed into the template without escaping special characters like `<`, `>`, and more. One must only use this raw string tag on sanitized HTML - otherwise, an [XSS attack](https://owasp.org/www-community/attacks/xss/) is possible.
-
-2. Create a new function `post` in `template.eml.html` that takes a parameter `(post: Post.t)` and renders the following template:
+1. Create a new function `post` in `template.eml.html` that takes a parameter `(post: Post.t)` and renders the following template:
 
 ```
 let post (post : Post.t) =
   <html>
     <body>
       <a href="/">all posts</a>
-      <h1><%s post.title %></h1>
-      <div>
-        <%s! post.html_body %>
-      </div>
+      ...
     </body>
   </html>
 ```
 
-3. Create a new route for the URL `/post/:slug` and read the `"slug"` parameter from the request using `Dream.param`.
+In the template (where `...` is), use `<%s ... %>` to render the `title` of the post inside an `<h1>` tag, and use `<%s! ... %>` to render the `html_body` of the post as raw HTML.
+
+`s!` means that the OCaml expression in this block is a string that should be placed into the template without escaping special characters like `<`, `>`, and more. One must only use this raw string tag on sanitized HTML - otherwise, an [XSS attack](https://owasp.org/www-community/attacks/xss/) is possible.
+
+2. Create a new route for the URL `/post/:slug` and read the `"slug"` parameter from the request using `Dream.param`.
 
 See an example here: https://aantron.github.io/dream/#routing
 
-4. Look up the post using the `slug` and render the new Template.
+3. Look up the post using the `slug` and render the new Template.
 
 To find the post, use the function `List.find : (Post.t -> bool) -> Post.t list -> Post.t`.
 
 `List.find` takes a predicate (a function returning `true` or `false`) that should be `true` for the item we're looking for.
 
-5. Modify `Template.all_posts` so that every blog post has an `<a>` tag around the title that links to the new route.
+Notice that, when the blog post does not exist, we get an error.
+
+3a. (optional) To avoid that, you can use `List.find_opt : (Post.t -> bool) -> Post.t list -> Post.t option` instead, and you can use
+
+```
+match post with
+| Some p -> ...
+| None -> ...
+```
+
+to render `Template.post` when a post was found, and return a 404 response when no post with the given slug was found.
+
+4. Modify `Template.all_posts` so that every blog post has an `<a>` tag around the title that links to the new route.
 
 You will need to use `<%s ... %>` again to render `post.slug` as part of the URL.
+
+5. Run the code and check in your browser that http://localhost:8080 shows the list of blog posts and that you can follow the link to an individual blog post's page and from there back to http://localhost:8080.
+
+### Step 6 - Making it pretty - serving files
+
+So far, we're serving naked, unstyles HTML pages. Let's change that and add some CSS.
+
+There already is a folder `static` in this directory that contains a CSS stylesheet, as well as the images belonging to the posts.
+
+**Tasks:**
+
+1. Serve the files from the `static` directory under the route `/static/**`.
+
+See https://aantron.github.io/dream/#static-files for an example of how to do this.
+
+2. Modify the templates in `template.eml.html` and add a HTML `<head>` tag that contains the `<link>` tag for the stylesheet:
+
+```
+<link rel="stylesheet" href="/static/chota.min.css">
+```
+
+3. Add a `<div class="container">` right inside the body of both templates, to wrap the existing elements.
+
+4. Add an `<img src="...">` tag to the `post` template in `template.eml.html` to show `post.image`.
+
+5. Look at how much nicer it looks now. A lot could be done here by doing more design work, but let's move on and do something else.
