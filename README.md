@@ -232,7 +232,7 @@ Hint: <%s ... %> is used to render an OCaml string.
 
 ### Step 5: Subpage for individual posts
 
-All we did in the last step was render a list of titles of the blog posts, but now we want to give every blog post its own HTML page under the URL `/post/:slug`. This would allow people to link to or bookmark a specific blog post.
+All we did in the last step was render a list of titles of the blog posts, but now we want to give every blog post its own HTML page under the URL `/post/:slug`, where `:slug` represents the `slug` field of the particular blog post. This would allow people to link to or bookmark a specific blog post.
 
 We will need a new template for the 
 
