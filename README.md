@@ -211,6 +211,8 @@ let all =
 
 This is, for now, a list of blog posts that have a `title`, a `slug`, a `html_body`, and an `image`.
 
+Important: in this step, we only need to use the `title` field. The `slug` and `html_body` field, we will use in step 5 of the tutorial, and the `image` field we will use in step 6.
+
 Now, `Post.t` is a type that represents a single blog post, and `Post.all : t list` is the list of all blog posts.
 
 2. Change the `home` function in `template.eml.hml` to render a list of blog posts.
