@@ -63,6 +63,14 @@ We look forward to building together with you at the Ada Tech School on the 22nd
 
 We've prepared a working directory in `src/` it already contains an OCaml module, and a dune file that declares an executable.
 
+At any point, when you see a squiggly red underscore saying that a module is not defined, you need to run
+
+```shell
+dune exec main
+```
+
+to tell the build system Dune to build all the files, so that the editor plugin can pick up the type information to display.
+
 ### Step 1: Hello World
 
 To write our web application, we'll use [Dream](https://github.com/aantron/dream), OCaml's web framework.
@@ -71,16 +79,13 @@ Dream exposes all of its functions in its toplevel `Dream` module. To run a Drea
 
 In Dream, a [Handler](https://aantron.github.io/dream/#type-handler) is a function that takes a `Dream.request` as input, and returns a `Dream.response`. If you've worked with other web frameworks, you might have come across the term "Controller". It's essentially the same thing.
 
-Here's an example of a handler:
-
-```ocaml
-let my_handler _req =
-    Dream.html "Good morning, world!"
-```
-
 **Tasks:**
 
-1. Update `main.ml` to implement a Dream application that always returns "Hello World!".
+1. Update `main.ml` to implement a Dream application that always returns "Hello World!". You can replace the `print_endline "Hello World"` with this call to the `Dream.run` function:
+
+```ocaml
+Dream.run (fun _ -> Dream.html "Hello world!")
+```
 
 2. In your terminal inside the dev container, run
 
