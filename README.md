@@ -215,7 +215,7 @@ Now, `Post.t` is a type that represents a single blog post, and `Post.all : t li
 
 2. Rename the `render` function in `template.eml.html` to `all_posts` and change the HTML template to render a list of blog posts.
 
-Instead of taking a `param` parameter, the new `all_posts` function takes a parameter `(post: Post.t)`.
+Instead of taking a `param` parameter, the new `all_posts` function takes a parameter `(posts: Post.t list)`.
 
 Instead of showing `Hello <%s param %>! This is a HTML Template.`, you can iterate over the list of posts using the `List.iter` function like this:
 
