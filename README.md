@@ -63,7 +63,13 @@ We look forward to building together with you at the Ada Tech School on the 22nd
 
 We've prepared a working directory in `src/` it already contains an OCaml module, and a dune file that declares an executable.
 
-At any point, when you see a squiggly red underscore saying that a module is not defined, you need to run
+At any point, when you see a squiggly red underline saying that a module is not defined, you can run
+
+```shell
+dune build
+```
+
+or
 
 ```shell
 dune exec main
