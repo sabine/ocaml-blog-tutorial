@@ -8,7 +8,7 @@ let () =
   Dream.run @@ Dream.logger
   @@ Dream.router
        [
-         Dream.get "/" (fun _ -> Dream.html (Template.all_posts Post.all));
+         Dream.get "/" (fun _ -> Dream.html (Template.home Post.all));
          Dream.get "/post/:slug" (fun request ->
              let slug = Dream.param request "slug" in
              let post = List.find_opt (fun p -> p.Post.slug = slug) Post.all in

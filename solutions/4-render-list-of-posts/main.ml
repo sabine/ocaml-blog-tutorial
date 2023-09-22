@@ -8,6 +8,6 @@ let () =
   Dream.run @@ Dream.logger
   @@ Dream.router
        [
-         Dream.get "/" (fun _ -> Dream.html (Template.all_posts Post.all));
+         Dream.get "/" (fun _ -> Dream.html (Template.home Post.all));
          Dream.get "**" (fun _ -> Dream.html ~code:404 "404 Not Found");
        ]

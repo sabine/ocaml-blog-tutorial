@@ -4,4 +4,4 @@
   dune exec solution2
 *)
 
-let () = Dream.run (fun _ -> Dream.html (Template.render "world"))
+let () = Dream.run (fun _ -> Dream.html (Template.home "world"))

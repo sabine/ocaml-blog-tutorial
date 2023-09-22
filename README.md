@@ -136,12 +136,12 @@ let render param =
 
 This runs `dream_eml` on the `template.eml.html` template to generate the corresponding `template.ml` OCaml file.
 
-The function `render` from `template.eml.html` can now be used in your program like this: `Template.render`.
+The function `home` from `template.eml.html` can now be used in your program like this: `Template.home`.
 
 3. Change `main.ml` by replacing the string "Hello world!" with
 
 ```ocaml
-(Template.render "world")
+(Template.home "world")
 ```
 
 to use the new template.
@@ -213,9 +213,9 @@ This is, for now, a list of blog posts that have a `title`, a `slug`, a `html_bo
 
 Now, `Post.t` is a type that represents a single blog post, and `Post.all : t list` is the list of all blog posts.
 
-2. Rename the `render` function in `template.eml.html` to `all_posts` and change the HTML template to render a list of blog posts.
+2. Change the `home` function in `template.eml.hml` to render a list of blog posts.
 
-Instead of taking a `param` parameter, the new `all_posts` function takes a parameter `(posts: Post.t list)`.
+Instead of taking `param` as parameter, the new `home` function takes a parameter `(posts: Post.t list)`.
 
 Instead of showing `Hello <%s param %>! This is a HTML Template.`, you can iterate over the list of posts using the `List.iter` function like this:
 
@@ -224,6 +224,7 @@ Instead of showing `Hello <%s param %>! This is a HTML Template.`, you can itera
         ... TODO: write HTML here ...
     <% ); %>
 ```
+
 Render a `<ul>` and iterate over the list to render a `<li>` tag that contains the title of the blog post.
 
 Hint: <%s ... %> is used to render an OCaml string.
@@ -232,9 +233,7 @@ Hint: <%s ... %> is used to render an OCaml string.
 
 ### Step 5: Subpage for individual posts
 
-All we did in the last step was render a list of titles of the blog posts, but now we want to give every blog post its own HTML page under the URL `/post/:slug`, where `:slug` is the value of the `slug` field of the particular blog post. This would allow people to link to or bookmark a specific blog post.
-
-We will need a new template for the 
+All we did in the last step was render a list of titles of the blog posts, but now we want to give every blog post its own HTML page under the URL `/post/:slug`, where `:slug` is the value of the `slug` field of the particular blog post. This will allow people to link to or bookmark a specific blog post.
 
 **Tasks:**
 
@@ -276,7 +275,7 @@ match post with
 
 to render `Template.post` when a post was found, and return a 404 response when no post with the given slug was found.
 
-4. Modify `Template.all_posts` so that every blog post has an `<a>` tag around the title that links to the new route.
+4. Modify `Template.home` so that every blog post has an `<a>` tag around the title that links to the new route.
 
 You will need to use `<%s ... %>` again to render `post.slug` as part of the URL.
 
@@ -302,14 +301,14 @@ See https://aantron.github.io/dream/#static-files for an example of how to do th
 
 3. Add a `<div class="container">` right inside the body of both templates, to wrap the existing elements.
 
-3a. (optional) Having the basic structure / layout of the page repeated in every template is repetitive. Can you see how to move the `<html>, <head>, <link>, <body>, <div class="container">` to a separate function that can be used by both the `post` and the `all_posts` template?
+3a. (optional) Having the basic structure / layout of the page repeated in every template is repetitive. Can you see how to move the `<html>, <head>, <link>, <body>, <div class="container">` to a separate function that can be used by both the `post` and the `home` template?
 
 Hint: You can create a `layout` function that takes a string parameter `inner_html` and renders it inside the template with `<%s! inner_html %>`.
 
 Hint 2: It is possible to pass a HTML template to the `layout` function like this:
 
 ```ocaml
-let all_posts =
+let home =
     layout (
         <h1>All Posts</h1>
         ...
