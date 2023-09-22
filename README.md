@@ -61,7 +61,9 @@ We look forward to building together with you at the Ada Tech School on the 22nd
 
 ## Tutorial
 
-We've prepared a working directory in `src/` it already contains an OCaml module, and a dune file that declares an executable.
+We've prepared a working directory in `src/` it already contains an OCaml module, and a dune file that declares an executable. This is where you will be writing your code in.
+
+When learning in a self-directed fashion, you can check the solutions in the `solutions/` directory after you completed the corresponding step, or when you get too stuck to continue. However, when you get stuck, we'd be happy if you open an issue on this repository with your question, so we can clarify and improve the tutorial.
 
 At any point, when you see a squiggly red underline saying that a module is not defined, you can run
 
